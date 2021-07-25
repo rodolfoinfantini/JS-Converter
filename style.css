@@ -1,0 +1,189 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+:root{
+    --bg-color-primary: hsl(246,9%,18%);
+    --bg-color-secondary: hsl(248,11%,11%);
+    --font-color: hsl(0,0%,100%);
+    --font-family: 'Roboto', sans-serif;
+    --main-roundness: 30px;
+    --menu-width: 120px;
+    --menu-width-hover: 320px;
+    --menu-transition: width 150ms ease-in-out;
+    --gap: 30px;
+}
+
+*, *::before, *::after{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-family);
+    border: 0;
+    outline: none;
+}
+
+body{
+    min-height: 100vh;
+    background: var(--bg-color-primary);
+    color: var(--font-color);
+    display: flex;
+    padding: var(--gap);
+    gap: var(--gap);
+}
+
+.menu{
+    width: var(--menu-width);
+    overflow-x: hidden;
+    background: var(--bg-color-secondary);
+    border-radius: var(--main-roundness);
+    position: relative;
+    font-size: 2rem;
+    display: flex;
+    flex-direction: column;
+    padding: calc(var(--main-roundness) * 1.9) 0;
+    transition: var(--menu-transition);
+    gap: calc(var(--main-roundness) + 5px);
+}
+
+.menu i{
+    font-size: 2.5rem;
+}
+
+.menu:hover{
+    width: var(--menu-width-hover);
+}
+
+.menu .menu__option{
+    display: flex;
+    width: calc(var(--menu-width-hover) - 20px);
+    margin-left: 20px;
+    padding: 20px;
+    border-radius: var(--main-roundness) 0 0 var(--main-roundness);
+    cursor: pointer;
+    position: relative;
+}
+
+.menu__option__title{
+    margin-left: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu__option.selected{
+    background: var(--bg-color-primary);
+}
+
+.menu__option__curve{
+    width: var(--menu-width-hover);
+    height: var(--main-roundness);
+    background: transparent;
+    position: absolute;
+    left: 0;
+}
+
+.menu__option__curve-top{
+    top: calc(var(--main-roundness) * -1);
+}
+
+.menu__option__curve-bottom{
+    bottom: calc(var(--main-roundness) * -1);
+}
+
+.menu__option.selected::before{
+    content: '';
+    width: var(--menu-width);
+    height: var(--main-roundness);
+    background: var(--bg-color-secondary);
+    position: absolute;
+    top: calc(var(--main-roundness) * -1);
+    left: -20px;
+    z-index: 1;
+    border-radius: 0 0 var(--main-roundness) 0;
+    transition: var(--menu-transition);
+}
+
+.menu:hover .menu__option.selected::before{
+    width: var(--menu-width-hover);
+}
+
+.menu__option.selected::after{
+    content: '';
+    width: var(--menu-width);
+    height: var(--main-roundness);
+    background: var(--bg-color-secondary);
+    position: absolute;
+    bottom: calc(var(--main-roundness) * -1);
+    left: -20px;
+    z-index: 1;
+    border-radius: 0 var(--main-roundness) 0 0;
+    transition: var(--menu-transition);
+}
+
+.menu:hover .menu__option.selected::after{
+    width: var(--menu-width-hover);
+}
+
+.menu__option.selected .menu__option__curve{
+    background: var(--bg-color-primary);
+}
+
+
+.converter{
+    display: none;
+    background: var(--bg-color-secondary);
+    border-radius: var(--main-roundness);
+    padding: 50px;
+    transition: var(--menu-transition);
+    width: 100%;
+    max-width: calc(100% - var(--menu-width) - var(--gap));
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    font-size: 5rem;
+    text-align: center;
+    gap: 50px;
+}
+
+.converter input, .converter select{
+    font-size: 1.7rem;
+    width: 80%;
+    text-align: center;
+    border-radius: var(--main-roundness);
+    background-color: hsl(0,0%,85%);
+    padding: 10px;
+    transition: width 100ms ease-in-out;
+    z-index: 1;
+}
+
+.converter input:focus, .converter select:focus{
+    width: 90%;
+}
+
+.converter select:focus + .selectplus{
+    transform: scale(1.15, 1.1);
+}
+
+.converter select + .selectplus{
+    width: 80%;
+    height: 53px;
+    border-radius: var(--main-roundness);
+    transform-origin: center;
+    position: absolute;
+    background: linear-gradient(to right, hsl(260,98%,67%), hsl(328,92%,63%), hsl(37,100%,65%));
+    top: 0;
+    z-index: 0;
+    transition: all 100ms ease-in-out;
+}
+
+.converter__input, .converter__output {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.converter-selected{
+    display: flex;
+}
